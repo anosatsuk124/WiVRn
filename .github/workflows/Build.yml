@@ -13,6 +13,8 @@ jobs:
     name: Linux
     runs-on: ubuntu-24.04
     if: ${{ vars.APK_ONLY == '' }}
+    permissions:
+      contents: write
 
     strategy:
       fail-fast: false
@@ -443,6 +445,8 @@ jobs:
     runs-on: ubuntu-22.04
     needs: [build-linux, build-android, build-server-flatpak, build-ubuntu]
     if: success() && startsWith(github.ref, 'refs/tags/')
+    permissions:
+      contents: write
 
     steps:
     - uses: actions/checkout@v4

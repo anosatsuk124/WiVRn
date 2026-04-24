@@ -161,13 +161,8 @@ android {
     }
 
     buildTypes {
-        if (project.hasProperty("signingKeyPassword")) {
-            release {
-                signingConfig = signingConfigs.release
-            }
-        }
-
         release {
+            signingConfig = project.hasProperty("signingKeyPassword") ? signingConfigs.release : signingConfigs.debug
             manifestPlaceholders.ComOculusSupportedDevices = "all"
             applicationIdSuffix = project.hasProperty('suffix') ? suffix: ".local"
         }
