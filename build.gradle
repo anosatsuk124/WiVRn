@@ -158,6 +158,19 @@ android {
                 enableV2Signing = true
             }
         }
+
+        // Deterministic debug signing for fork/nightly builds without a release key.
+        // Uses the committed debug.keystore so every build signs with the same certificate,
+        // which lets users update existing installs without uninstalling first.
+        debug {
+            storeFile file("debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+            enableV1Signing = true
+            enableV2Signing = true
+            enableV3Signing = true
+        }
     }
 
     buildTypes {
